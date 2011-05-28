@@ -10,7 +10,7 @@ import static groovyx.net.http.ContentType.JSON
 import static groovyx.net.http.ContentType.URLENC
 
 import java.lang.Character;
-
+ 
 /*
  * This is a Groovy demo for some of the REST calls to the Neo4j Graph Database
  * through reXster.  The full list of calls can be found here:
@@ -44,7 +44,7 @@ def suits =
 		, [Name:"Diamonds", Id:300, UCBlack:(("\u2666")), UCWhite:(("\u2662")), UCFrag:192]
 		, [Name:"Clubs", Id:400, UCBlack:(("\u2663")), UCWhite:(("\u2667")), UCFrag:208]
 	]
-
+	
 // Define two different Decks of Cards
 def allCardNames = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Knight", "Queen", "King"]
 
@@ -54,9 +54,11 @@ westernCardNames.remove("Knight")
 // We get this back from each REST command
 def REST_Response
 
+
 //  Prettification stuff
 def topFrm = "-----------------------------------------\n"
 def botFrm = "\n-----------------------------------------"
+
 
 /*
  * This shows that reXster understands the HEAD command of HTTP
@@ -72,6 +74,7 @@ try {
 	assert ex.response.status == 404
 }
 
+
 /*
  * This shows that an HTTP DELETE on the database itself, flushes the toilet on everything
  */
@@ -79,6 +82,8 @@ println(topFrm + "      ----[ Evacuate database ]----     " + botFrm)
 REST_Response = neo4jsample.delete( path : "" )
 assert REST_Response.status != "200", "Database evacuation failed ${REST_Response.status}"
 println ("Response : " + REST_Response.data)
+
+
 
 /*
  * Having flushed everything we need to create an index
@@ -91,12 +96,17 @@ REST_Response = neo4jsample.post(
 )
 println ("Response : " + REST_Response.data.results)
 
+
+
 /*
  * This uses an HTTP GET to verify that the index was created correctly
  */
 println(topFrm + "        ----[ List indices ]----" + botFrm)
 REST_Response = neo4jsample.get( path : "indices")
 println ("Response : " + REST_Response.data.results)
+
+
+
 
 /*
  * Using POST again, we loop through the Suits creating a vertex for each one.
@@ -124,11 +134,13 @@ REST_Response = neo4jsample.post(path : "vertices", query : (deckMAT))
 println ("Response : " + REST_Response.data.results)
 def idMAT = REST_Response.data.results._id
 
+
 println(topFrm + "  ----[ Create 52 card deck ]----" + botFrm)
 def deckWest = [Name:"Western", Id:2, Type:"Deck", UCFrag:126976]
 REST_Response = neo4jsample.post(path : "vertices", query : (deckWest))
 println ("Response : " + REST_Response.data.results)
 def idWest = REST_Response.data.results._id
+
 
 /*
 * The final job is to record all 56 playing cards and relate them by integer value to our
@@ -146,57 +158,60 @@ suits.each { suit ->
 	allCardNames.each { card ->
 		numCard = valMAT + suit["Id"]
 		numUC = uniCodeBaseNumber + fragUC + valMAT
-
-REST_Response = neo4jsample.post(
+		
+		REST_Response = neo4jsample.post(
 			   path : "vertices"
 			, query : [   ID:(numCard), Type:"Card", Name:card, UCCode:(numUC)  ]
 		)
 		pk = REST_Response.data.results._id
-
-//  Relate the card to its Suit
+		
+		//  Relate the card to its Suit
 		REST_Response = neo4jsample.post(
 			   path : "edges"
 			, query : [  _outV:(pk), _label:"ofSuit", _inV:(fk)  ]
 		)
-
-//  Stuff the card into a local map in case we want to reuse its properties later.
+		
+		//  Stuff the card into a local map in case we want to reuse its properties later.
 //		spec = [ID:(numCard), Type:"Card", Name:(card), PK:(pk), UCCode:(numUC), SuitFK:(fk)] 
 //		cardsMAT.put("${card} of ${suit["Name"]}",spec)
 
+		
 		println ("The ${card} of ${suit["Name"]} has value :")
+		
 
-//  Relate the card to 56 card deck
+		//  Relate the card to 56 card deck
 		REST_Response = neo4jsample.post(
 			  path : "edges"
 			, query : [  _outV:(pk), _label:"ofDeck", _inV:(idMAT), Val:valMAT  ]
 		)
 		println (" -- ${valMAT} in the Major Arcana Tarot deck and ")
+		
 
-//  Relate the card to 52 card deck
+		//  Relate the card to 52 card deck
 		if (!card.equals("Knight")) {
-
-REST_Response = neo4jsample.post(
+			
+			REST_Response = neo4jsample.post(
 				   path : "edges"
 				, query : [  _outV:(pk), _label:"ofDeck", _inV:(idWest), Val:valWest  ]
 			)
 			println (" -- ${valWest} in the Western deck.")
 			valWest++
 	    }
-
-valMAT++
+		
+		valMAT++
 	}
 	valMAT = 1
 	valWest = 1
 }
 
 println(topFrm + "        ----[ Finished ]----" + botFrm + botFrm)
-println("Now running the following five commands on Gremlin ")
+println("Now running the following eight commands on Gremlin ")
 println("should obtain the results indicated below:")
 println("")
 println("- - - - - - - ")
 println("")
 println("g.V{it.Name==\"Western\"}")
-println("western = g.v(253)  //  Be sure to use the same ID as returned by the preceding command.")
+println("western = g.v(${idWest})  //  Be sure to use the same ID as returned by the preceding command.")
 println("western.Type")
 println("cardNames = []")
 println("cardValues = []")
@@ -213,10 +228,13 @@ println("         \\,,,/")
 println("         (o o)")
 println("-----oOOo-(_)-oOOo-----")
 println("gremlin>  g.V{it.Name==\"Western\"}")
-println("==>v[253]")
+println("==>v[${idWest}]")
 println("")
-println("gremlin>  western = g.v(253)")
-println("==>v[253]")
+println("gremlin>  western = g.v(${idWest})")
+println("==>v[${idWest}]")
+println("")
+println("gremlin>  western.Type")
+println("==>Deck")
 println("")
 println("gremlin>  cardNames = []")
 println("==>")
@@ -270,6 +288,8 @@ println("==>The Two of Spades has value 2")
 println("==>The Ace of Spades has value 1")
 println("gremlin>")
 
+		 
 println("*")
 println("*/")
+
 
