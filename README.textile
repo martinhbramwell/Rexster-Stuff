@@ -445,7 +445,7 @@ The King of Clubs has value :
         ----[ Finished ]----
 -----------------------------------------
 -----------------------------------------
-Now running the following eight commands on Gremlin
+Now, running the following eight commands on Gremlin
 should obtain the results indicated below:
 
 - - - - - - -
