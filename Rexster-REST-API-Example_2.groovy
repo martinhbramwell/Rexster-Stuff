@@ -32,7 +32,7 @@ import java.lang.Character;
  */
 
 //  Identification of the host and database proxy interface
-def urlGraphDatabase = "http://aHost:8182/neo4jsample/"
+def urlGraphDatabase = "http://localhost:8182/emptygraph/"
 neo4jsample = new RESTClient( urlGraphDatabase )
 
 // Define Suits 
