@@ -5,26 +5,26 @@ echo -----------------------------------------
 echo .     ----[ Evacuate database ]----
 echo -----------------------------------------
 
-echo curl -sSX DELETE "http://localhost:8182/emptygraph"
-curl -sSX DELETE "http://localhost:8182/emptygraph/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
+echo curl -sSX DELETE "http://localhost:8182/graphs/emptygraph"
+curl -sSX DELETE "http://localhost:8182/graphs/emptygraph/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
 
 echo -----------------------------------------
 echo . ----[ Recreate index vertices ]----
 echo -----------------------------------------
-echo curl -gsX POST "http://localhost:8182/emptygraph/indices/vertices?class=vertex&type=automatic&keys=[ID]"
-curl -gsX POST "http://localhost:8182/emptygraph/indices/vertices?class=vertex&type=automatic&keys=[ID]" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
+echo curl -gsX POST "http://localhost:8182/graphs/emptygraph/indices/vertices?class=vertex&type=automatic&keys=[ID]"
+curl -gsX POST "http://localhost:8182/graphs/emptygraph/indices/vertices?class=vertex&type=automatic&keys=[ID]" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
 
 echo -----------------------------------------
 echo .      ----[ List indices ]----
 echo -----------------------------------------
-echo curl -sX GET "http://localhost:8182/emptygraph/indices"
-curl -sX GET "http://localhost:8182/emptygraph/indices" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
+echo curl -sX GET "http://localhost:8182/graphs/emptygraph/indices"
+curl -sX GET "http://localhost:8182/graphs/emptygraph/indices" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
 
 echo -----------------------------------------
 echo .      ----[ Create deck ]----
 echo -----------------------------------------
-echo curl -sd "ID=5&Type=Pack&Name=Deck of Cards" "http://localhost:8182/emptygraph/vertices/"
-curl -sd "ID=5&Type=Pack&Name=Deck of Cards" "http://localhost:8182/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
+echo curl -sd "ID=5&Type=Pack&Name=Deck of Cards" "http://localhost:8182/graphs/emptygraph/vertices/"
+curl -sd "ID=5&Type=Pack&Name=Deck of Cards" "http://localhost:8182/graphs/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
 
 echo .
 echo -
@@ -32,14 +32,14 @@ echo --
 echo ---
 echo .      ----[ Create suits ]----
 echo -----------------------------------------
-echo curl -sd "ID=101&Type=Suit&Name=Diamond" "http://localhost:8182/emptygraph/vertices/"
-curl -sd "ID=101&Type=Suit&Name=Diamond" "http://localhost:8182/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
-echo curl -sd "ID=202&Type=Suit&Name=Heart" "http://localhost:8182/emptygraph/vertices/"
-curl -sd "ID=202&Type=Suit&Name=Heart" "http://localhost:8182/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
-echo curl -sd "ID=303&Type=Suit&Name=Spade" "http://localhost:8182/emptygraph/vertices/"
-curl -sd "ID=303&Type=Suit&Name=Spade" "http://localhost:8182/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
-echo curl -sd "ID=404&Type=Suit&Name=Club" "http://localhost:8182/emptygraph/vertices/"
-curl -sd "ID=404&Type=Suit&Name=Club" "http://localhost:8182/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
+echo curl -sd "ID=101&Type=Suit&Name=Diamond" "http://localhost:8182/graphs/emptygraph/vertices/"
+curl -sd "ID=101&Type=Suit&Name=Diamond" "http://localhost:8182/graphs/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
+echo curl -sd "ID=202&Type=Suit&Name=Heart" "http://localhost:8182/graphs/emptygraph/vertices/"
+curl -sd "ID=202&Type=Suit&Name=Heart" "http://localhost:8182/graphs/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
+echo curl -sd "ID=303&Type=Suit&Name=Spade" "http://localhost:8182/graphs/emptygraph/vertices/"
+curl -sd "ID=303&Type=Suit&Name=Spade" "http://localhost:8182/graphs/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
+echo curl -sd "ID=404&Type=Suit&Name=Club" "http://localhost:8182/graphs/emptygraph/vertices/"
+curl -sd "ID=404&Type=Suit&Name=Club" "http://localhost:8182/graphs/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
 echo -----------------------------------------
 echo ---
 echo --
@@ -52,14 +52,14 @@ echo --
 echo ---
 echo .       ----[ Create aces ]----
 echo -----------------------------------------
-echo curl -sd "ID=1&Type=Card&Name=Ace" "http://localhost:8182/emptygraph/vertices/"
-curl -sd "ID=1&Type=Card&Name=Ace" "http://localhost:8182/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
-echo curl -sd "ID=14&Type=Card&Name=Ace" "http://localhost:8182/emptygraph/vertices/"
-curl -sd "ID=14&Type=Card&Name=Ace" "http://localhost:8182/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
-echo curl -sd "ID=27&Type=Card&Name=Ace" "http://localhost:8182/emptygraph/vertices/"
-curl -sd "ID=27&Type=Card&Name=Ace" "http://localhost:8182/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
-echo curl -sd "ID=40&Type=Card&Name=Ace" "http://localhost:8182/emptygraph/vertices/"
-curl -sd "ID=40&Type=Card&Name=Ace" "http://localhost:8182/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
+echo curl -sd "ID=1&Type=Card&Name=Ace" "http://localhost:8182/graphs/emptygraph/vertices/"
+curl -sd "ID=1&Type=Card&Name=Ace" "http://localhost:8182/graphs/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
+echo curl -sd "ID=14&Type=Card&Name=Ace" "http://localhost:8182/graphs/emptygraph/vertices/"
+curl -sd "ID=14&Type=Card&Name=Ace" "http://localhost:8182/graphs/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
+echo curl -sd "ID=27&Type=Card&Name=Ace" "http://localhost:8182/graphs/emptygraph/vertices/"
+curl -sd "ID=27&Type=Card&Name=Ace" "http://localhost:8182/graphs/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
+echo curl -sd "ID=40&Type=Card&Name=Ace" "http://localhost:8182/graphs/emptygraph/vertices/"
+curl -sd "ID=40&Type=Card&Name=Ace" "http://localhost:8182/graphs/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
 echo -----------------------------------------
 echo ---
 echo --
@@ -72,14 +72,14 @@ echo --
 echo ---
 echo .      ----[ Create kings ]----
 echo -----------------------------------------
-echo curl -sd "ID=13&Type=Card&Name=King" "http://localhost:8182/emptygraph/vertices/"
-curl -sd "ID=13&Type=Card&Name=King" "http://localhost:8182/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
-echo curl -sd "ID=26&Type=Card&Name=King" "http://localhost:8182/emptygraph/vertices/"
-curl -sd "ID=26&Type=Card&Name=King" "http://localhost:8182/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
-echo curl -sd "ID=39&Type=Card&Name=King" "http://localhost:8182/emptygraph/vertices/"
-curl -sd "ID=39&Type=Card&Name=King" "http://localhost:8182/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
-echo curl -sd "ID=52&Type=Card&Name=King" "http://localhost:8182/emptygraph/vertices/"
-curl -sd "ID=52&Type=Card&Name=King" "http://localhost:8182/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
+echo curl -sd "ID=13&Type=Card&Name=King" "http://localhost:8182/graphs/emptygraph/vertices/"
+curl -sd "ID=13&Type=Card&Name=King" "http://localhost:8182/graphs/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
+echo curl -sd "ID=26&Type=Card&Name=King" "http://localhost:8182/graphs/emptygraph/vertices/"
+curl -sd "ID=26&Type=Card&Name=King" "http://localhost:8182/graphs/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
+echo curl -sd "ID=39&Type=Card&Name=King" "http://localhost:8182/graphs/emptygraph/vertices/"
+curl -sd "ID=39&Type=Card&Name=King" "http://localhost:8182/graphs/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
+echo curl -sd "ID=52&Type=Card&Name=King" "http://localhost:8182/graphs/emptygraph/vertices/"
+curl -sd "ID=52&Type=Card&Name=King" "http://localhost:8182/graphs/emptygraph/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
 echo -----------------------------------------
 echo ---
 echo --
@@ -89,15 +89,15 @@ echo .
 echo -----------------------------------------
 echo .   ----[ Check an Ace vertex ]----
 echo -----------------------------------------
-echo curl -sX GET "http://localhost:8182/emptygraph/indices/vertices?key=ID&value=40"
-curl -sX GET "http://localhost:8182/emptygraph/indices/vertices?key=ID&value=40" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
-rem curl -sX GET "http://localhost:8182/emptygraph/indices/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
+echo curl -sX GET "http://localhost:8182/graphs/emptygraph/indices/vertices?key=ID&value=40"
+curl -sX GET "http://localhost:8182/graphs/emptygraph/indices/vertices?key=ID&value=40" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
+rem curl -sX GET "http://localhost:8182/graphs/emptygraph/indices/vertices/" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
 
 echo -----------------------------------------
 echo .   ----[ Check a King vertex ]----
 echo -----------------------------------------
-echo curl -sX GET "http://localhost:8182/emptygraph/indices/vertices?key=ID&value=52"
-curl -sX GET "http://localhost:8182/emptygraph/indices/vertices?key=ID&value=52" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
+echo curl -sX GET "http://localhost:8182/graphs/emptygraph/indices/vertices?key=ID&value=52"
+curl -sX GET "http://localhost:8182/graphs/emptygraph/indices/vertices?key=ID&value=52" | groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))" | more
 
 echo -----------------------------------------
 echo * * * *  Some Notes on the Above  * * * *
