@@ -28,7 +28,7 @@ When you run the script, you should get results as follows.  You will find the s
 bc. -----------------------------------------
 .     ----[ Evacuate database ]----
 -----------------------------------------
-curl -sSX DELETE "http://aHost:8182/neo4jsample"
+curl -sSX DELETE "http://aHost:8182/graphs/neo4jsample"
 {
     "version": "0.4-SNAPSHOT",
     "queryTime": 262.494255
@@ -37,7 +37,7 @@ curl -sSX DELETE "http://aHost:8182/neo4jsample"
 bc. -----------------------------------------
 . ----[ Recreate index vertices ]----
 -----------------------------------------
-curl -gsX POST "http://aHost:8182/neo4jsample/indices/vertices?class=vertex&type=automatic&keys=[ID]"
+curl -gsX POST "http://aHost:8182/graphs/neo4jsample/indices/vertices?class=vertex&type=automatic&keys=[ID]"
 {
     "version": "0.4-SNAPSHOT",
     "queryTime": 13.161729,
@@ -51,7 +51,7 @@ curl -gsX POST "http://aHost:8182/neo4jsample/indices/vertices?class=vertex&type
 bc. -----------------------------------------
 .      ----[ List indices ]----
 -----------------------------------------
-curl -sX GET "http://aHost:8182/neo4jsample/indices"
+curl -sX GET "http://aHost:8182/graphs/neo4jsample/indices"
 {
     "version": "0.4-SNAPSHOT",
     "results": [
@@ -68,7 +68,7 @@ curl -sX GET "http://aHost:8182/neo4jsample/indices"
 bc. -----------------------------------------
 .      ----[ Create deck ]----
 -----------------------------------------
-curl -sd "ID=5&Type=Pack&Name=Deck of Cards" "http://aHost:8182/neo4jsample/vertices/"
+curl -sd "ID=5&Type=Pack&Name=Deck of Cards" "http://aHost:8182/graphs/neo4jsample/vertices/"
 {
     "version": "0.4-SNAPSHOT",
     "results": {
@@ -87,7 +87,7 @@ bc. .
 ---
 .      ----[ Create suits ]----
 -----------------------------------------
-curl -sd "ID=101&Type=Suit&Name=Diamond" "http://aHost:8182/neo4jsample/vertices/"
+curl -sd "ID=101&Type=Suit&Name=Diamond" "http://aHost:8182/graphs/neo4jsample/vertices/"
 {
     "version": "0.4-SNAPSHOT",
     "results": {
@@ -100,7 +100,7 @@ curl -sd "ID=101&Type=Suit&Name=Diamond" "http://aHost:8182/neo4jsample/vertices
     "queryTime": 14.430605
 }
 
-bc. curl -sd "ID=202&Type=Suit&Name=Heart" "http://aHost:8182/neo4jsample/vertices/"
+bc. curl -sd "ID=202&Type=Suit&Name=Heart" "http://aHost:8182/graphs/neo4jsample/vertices/"
 {
     "version": "0.4-SNAPSHOT",
     "results": {
@@ -113,7 +113,7 @@ bc. curl -sd "ID=202&Type=Suit&Name=Heart" "http://aHost:8182/neo4jsample/vertic
     "queryTime": 12.442643
 }
 
-bc. curl -sd "ID=303&Type=Suit&Name=Spade" "http://aHost:8182/neo4jsample/vertices/"
+bc. curl -sd "ID=303&Type=Suit&Name=Spade" "http://aHost:8182/graphs/neo4jsample/vertices/"
 {
     "version": "0.4-SNAPSHOT",
     "results": {
@@ -126,7 +126,7 @@ bc. curl -sd "ID=303&Type=Suit&Name=Spade" "http://aHost:8182/neo4jsample/vertic
     "queryTime": 15.684675
 }
 
-bc. curl -sd "ID=404&Type=Suit&Name=Club" "http://aHost:8182/neo4jsample/vertices/"
+bc. curl -sd "ID=404&Type=Suit&Name=Club" "http://aHost:8182/graphs/neo4jsample/vertices/"
 {
     "version": "0.4-SNAPSHOT",
     "results": {
@@ -150,7 +150,7 @@ bc. -----------------------------------------
 ---
 .       ----[ Create aces ]----
 -----------------------------------------
-curl -sd "ID=1&Type=Card&Name=Ace" "http://aHost:8182/neo4jsample/vertices/"
+curl -sd "ID=1&Type=Card&Name=Ace" "http://aHost:8182/graphs/neo4jsample/vertices/"
 {
     "version": "0.4-SNAPSHOT",
     "results": {
@@ -163,7 +163,7 @@ curl -sd "ID=1&Type=Card&Name=Ace" "http://aHost:8182/neo4jsample/vertices/"
     "queryTime": 11.767697
 }
 
-bc. curl -sd "ID=14&Type=Card&Name=Ace" "http://aHost:8182/neo4jsample/vertices/"
+bc. curl -sd "ID=14&Type=Card&Name=Ace" "http://aHost:8182/graphs/neo4jsample/vertices/"
 {
     "version": "0.4-SNAPSHOT",
     "results": {
@@ -176,7 +176,7 @@ bc. curl -sd "ID=14&Type=Card&Name=Ace" "http://aHost:8182/neo4jsample/vertices/
     "queryTime": 11.770491
 }
 
-bc. curl -sd "ID=27&Type=Card&Name=Ace" "http://aHost:8182/neo4jsample/vertices/"
+bc. curl -sd "ID=27&Type=Card&Name=Ace" "http://aHost:8182/graphs/neo4jsample/vertices/"
 {
     "version": "0.4-SNAPSHOT",
     "results": {
@@ -189,7 +189,7 @@ bc. curl -sd "ID=27&Type=Card&Name=Ace" "http://aHost:8182/neo4jsample/vertices/
     "queryTime": 11.557055
 }
 
-bc. curl -sd "ID=40&Type=Card&Name=Ace" "http://aHost:8182/neo4jsample/vertices/"
+bc. curl -sd "ID=40&Type=Card&Name=Ace" "http://aHost:8182/graphs/neo4jsample/vertices/"
 {
     "version": "0.4-SNAPSHOT",
     "results": {
@@ -213,7 +213,7 @@ bc. -----------------------------------------
 ---
 .      ----[ Create kings ]----
 -----------------------------------------
-curl -sd "ID=13&Type=Card&Name=King" "http://aHost:8182/neo4jsample/vertices/"
+curl -sd "ID=13&Type=Card&Name=King" "http://aHost:8182/graphs/neo4jsample/vertices/"
 {
     "version": "0.4-SNAPSHOT",
     "results": {
@@ -226,7 +226,7 @@ curl -sd "ID=13&Type=Card&Name=King" "http://aHost:8182/neo4jsample/vertices/"
     "queryTime": 12.428674
 }
 
-bc. curl -sd "ID=26&Type=Card&Name=King" "http://aHost:8182/neo4jsample/vertices/"
+bc. curl -sd "ID=26&Type=Card&Name=King" "http://aHost:8182/graphs/neo4jsample/vertices/"
 {
     "version": "0.4-SNAPSHOT",
     "results": {
@@ -239,7 +239,7 @@ bc. curl -sd "ID=26&Type=Card&Name=King" "http://aHost:8182/neo4jsample/vertices
     "queryTime": 20.65905
 }
 
-bc. curl -sd "ID=39&Type=Card&Name=King" "http://aHost:8182/neo4jsample/vertices/"
+bc. curl -sd "ID=39&Type=Card&Name=King" "http://aHost:8182/graphs/neo4jsample/vertices/"
 {
     "version": "0.4-SNAPSHOT",
     "results": {
@@ -252,7 +252,7 @@ bc. curl -sd "ID=39&Type=Card&Name=King" "http://aHost:8182/neo4jsample/vertices
     "queryTime": 20.145577
 }
 
-bc. curl -sd "ID=52&Type=Card&Name=King" "http://aHost:8182/neo4jsample/vertices/"
+bc. curl -sd "ID=52&Type=Card&Name=King" "http://aHost:8182/graphs/neo4jsample/vertices/"
 {
     "version": "0.4-SNAPSHOT",
     "results": {
@@ -273,7 +273,7 @@ bc. -----------------------------------------
 -----------------------------------------
 .   ----[ Check an Ace vertex ]----
 -----------------------------------------
-curl -sX GET "http://aHost:8182/neo4jsample/indices/vertices?key=ID&value=40"
+curl -sX GET "http://aHost:8182/graphs/neo4jsample/indices/vertices?key=ID&value=40"
 {
     "version": "0.4-SNAPSHOT",
     "results": [
@@ -292,7 +292,7 @@ curl -sX GET "http://aHost:8182/neo4jsample/indices/vertices?key=ID&value=40"
 bc. -----------------------------------------
 .   ----[ Check a King vertex ]----
 -----------------------------------------
-curl -sX GET "http://aHost:8182/neo4jsample/indices/vertices?key=ID&value=52"
+curl -sX GET "http://aHost:8182/graphs/neo4jsample/indices/vertices?key=ID&value=52"
 {
     "version": "0.4-SNAPSHOT",
     "results": [
@@ -363,7 +363,7 @@ When you run the script, you should get results like this:
 -----------------------------------------
        ----[ Test connection ]----
 -----------------------------------------
-Got request status 200 from http://aHost:8182/neo4jsample/
+Got request status 200 from http://aHost:8182/graphs/neo4jsample/
 -----------------------------------------
       ----[ Evacuate database ]----
 -----------------------------------------
