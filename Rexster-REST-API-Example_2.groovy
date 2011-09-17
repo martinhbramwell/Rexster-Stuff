@@ -84,20 +84,6 @@ assert REST_Response.status != "200", "Database evacuation failed ${REST_Respons
 println ("Response : " + REST_Response.data)
 
 
-
-/*
- * Having flushed everything we need to create an index
- * Shows one use of and HTTP POST on reXster
- */
-println(topFrm + "----[ Recreate the index \"vertices\" ]----" + botFrm)
-REST_Response = neo4jsample.post( 
-	   path : "indices/vertices"
-	, query : ["class":"vertex", "type":"automatic", "keys":"[ID]"]
-)
-println ("Response : " + REST_Response.data.results)
-
-
-
 /*
  * This uses an HTTP GET to verify that the index was created correctly
  */
